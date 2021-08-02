@@ -206,6 +206,52 @@ void * list_remove_item(list *lptr)
 
 }
 
+/*!@*****************************************************************************
+ *!
+ *! FUNCTION:			list_search_and_remove_item
+ *!
+ *! GENERAL DESCRIPTION: This function search for element in the list and remove it.
+ *!						 in order to iterface with the function you need to supply comapre function
+ *!                      the will enable the function to identify the requsted element to be deleted.
+ *!
+ *! Input:				list *listptr - pointer to list structure.
+ *!						function pointer for enable the link list to find the first
+ *!                     element that need to be remove.
+ *!
+ *!
+ *! Output:				ERROR - if fail.
+ *						OK    - if success .
+ *!
+ *! ALGORITHM:			The algorithm is base on the following operations:
+ *!						1. New node allocation.
+ *!						2. Handle pointer reside in the object.
+ *!
+ *! ASSUMPTIONS:	    Before used this method the the internal iterator should
+ *!                     point to the element ot be removed.
+ *!
+ *! REMARKS:			none.
+ *!
+ *!*****************************************************************************
+ *!@*/
+
+void list_search_and_remove_item(list* listptr, int (*comapre_fun)(void*, void*),void *item_to_remove)
+{
+
+	void* element_data = (void*)list_first(listptr);
+	while (element_data)
+	{
+		if (comapre_fun(element_data, item_to_remove))
+		{
+			void* deleted_task = (void*)list_remove_item(listptr);
+			//task_delete(deleted_task);
+			free(deleted_task);
+			break;
+
+		}
+		element_data = (void*)list_next(listptr);
+	}
+}
+
 
 
 

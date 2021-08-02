@@ -37,6 +37,14 @@ void db_remove(db* data_base,int id)
     }
 }
 
+void db_find_and_remove_item(db* data_base, int id)
+{
+
+    task* current = task_create_by_id(id);
+    list_search_and_remove_item(data_base->llist, task_compare_by_id, (void*)current);
+    data_base->NumOfItems--;
+}
+
 
 
 task* db_find_by_description(db* data_base,char* description)

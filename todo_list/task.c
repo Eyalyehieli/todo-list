@@ -3,6 +3,17 @@
 #include <stdio.h>
 #include "string.h"
 
+int task_compare_by_id(void *first, void* second)
+{
+    task* first_task = (task*)first;
+    task* second_task = (task*)first;
+    if (first_task->task_id == second_task->task_id)
+        return 1;
+    else
+        return 0;
+}
+
+
 task* task_create(char* description)
 {
    static int id=0;
@@ -18,6 +29,21 @@ task* task_create(char* description)
    id++;
    return new_task;
 }
+
+task* task_create_by_id(int id )
+{
+    task* new_task = (task*)malloc(sizeof(task));
+    if (new_task == NULL)
+    {
+        return NULL;
+    }
+    new_task->description = (char*)malloc(strlen("") + 1);
+    new_task->is_done = NOT_DONE;
+    new_task->task_id = id;
+    return new_task;
+}
+
+
 
 
 void task_edit_description(task* t,char* description)

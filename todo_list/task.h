@@ -13,7 +13,10 @@ typedef struct{
    int is_done;
 }task;
 
+
+int task_compare_by_id(void* first, void* second);
 task* task_create(char*);
+task* task_create_by_id(int);
 void task_edit_description(task*,char*);
 void task_edit_is_done(task*,int);
 void task_delete(task*);

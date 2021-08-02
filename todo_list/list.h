@@ -7,7 +7,7 @@
 
 /*! STRUCTURE TYPE DEFINITION 	 */
 
-
+typedef int (*comapre_fun)(void*,void *);
 /* Node type definition */
 
 typedef struct node_t {
@@ -122,6 +122,34 @@ int list_add(list *listptr,void *data);
 void* list_remove_item(list *listptr);
 
 
+/*!@*****************************************************************************
+ *!
+ *! FUNCTION:			list_search_and_remove_item
+ *!
+ *! GENERAL DESCRIPTION: This function search for element in the list and remove it.
+ *!						 in order to iterface with the function you need to supply comapre function
+ *!                      the will enable the function to identify the requsted element to be deleted.
+ *!
+ *! Input:				list *listptr - pointer to list structure.
+ *!						function pointer for enable the link list to find the first
+ *!                     element that need to be remove.
+ *!
+ *!
+ *! Output:				ERROR - if fail.
+ *						OK    - if success .
+ *!
+ *! ALGORITHM:			The algorithm is base on the following operations:
+ *!						1. New node allocation.
+ *!						2. Handle pointer reside in the object.
+ *!
+ *! ASSUMPTIONS:	    Before used this method the the internal iterator should
+ *!                     point to the element ot be removed.
+ *!
+ *! REMARKS:			none.
+ *!
+ *!*****************************************************************************
+ *!@*/
+void list_search_and_remove_item(list* listptr, int (*comapre_fun)(void*, void*),void *);
 
 
 

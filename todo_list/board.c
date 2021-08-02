@@ -36,9 +36,11 @@ int board_edit(board* b,int id,char* description,int is_done)
   free(t);
   return 1;
 }
+
 int board_remove(board* b,int id)
 {
-   db_remove(b->data_base,id);
+   //db_remove(b->data_base,id);
+    db_find_and_remove_item(b->data_base, id);
    return OK;
 }
 
